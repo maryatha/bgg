@@ -1,0 +1,179 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Top Ranked Board Game Analysis</title>
+	<meta name="description" content="fullPage full-screen backgrounds." />
+	<meta name="keywords"  content="fullpage,jquery,demo,screen,fullscreen,backgrounds,full-screen" />
+	<meta name="Resource-type" content="Document" />
+
+	<link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css" />
+	<link rel="stylesheet" type="text/css" href="css/display_style.css" />
+	<link rel="stylesheet" type="text/css" href="css/bubble_chart.css" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/linechart.css" />
+	<link rel="stylesheet" type="text/css" href="css/annotations.css" />
+
+	<link href='https://fonts.googleapis.com/css?family=Lato:300,900' rel='stylesheet' type='text/css'>
+
+	<!-- import d3.v3 -->
+	<script type="text/javascript" src="import/d3.min.js"></script>
+	<script type="text/javascript" src="import/d3.v3.js"></script>
+	<script type="text/javascript" src="import/d3-annotation.min.js"></script>
+
+	<!-- import fullPage -->
+    <script type="text/javascript" src="import/jquery.min.js"></script>
+	<script type="text/javascript" src="import/jquery.fullPage.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#fullpage').fullpage({
+				verticalCentered: false,
+				anchors: ['title', 'intro', 'structure', 'dataset', 'bubble', 'bar',  'findings', 'ref'],
+				navigation: true,
+				navigationPosition: 'right',
+				navigationTooltips: ['Title', 'Introduction', 'Purpose', 'Bubble Chart', 'Bar Chart', 'Findings', 'References', 'Ref']
+			});});
+	</script>
+
+</head>
+<body>
+<div id="fullpage">
+	<div class="section" id="title">
+		<div id="title_text">
+			<h1>Board Game Analysis</h1>
+			<h3>Board game analysis of the top 500 ranked board games on <a href="http://www.boardgamegeek.com" target="_blank" style="text-decoration: underline;">BoardGameGeek.</a>
+			<br/>
+			<br/>
+			Mary Athappilly (maryfa2)</h3>
+		</div>
+	</div>
+	<div class="section" id="about">
+		<div id="content_div" style="background:white;">
+			<h1>Essay</h1>
+			<h2>Overview</h2>
+			<p>BoardGameGeek.com is a great website for users interested in finding new board games. It has a library of over 18,000 board games and user 
+			generated reviews and ratings for each game. Approximately 15 million user reviews were aggregated to put this data set together. For ease of 
+			use and to reduce load time, I decided to focus only on the top 500 ranked board games. My data is sourced from 
+			<a href='https://www.kaggle.com/jvanelteren/boardgamegeek-reviews' target='_blank'>Kaggle</a>. </p>
+
+			<h2>Messaging</h2>
+			<p>The message I am trying to communicate with my narrative visualization is on the relationship between the category of the board game 
+			(i.e. strategy, party, family, etc.) and its number of reviews, average rating, quartile ranking, star rating, and actual purchase volumes. 
+			I want users to understand that the highest rated board games are mostly strategy games, and that people tend to rate games harshly. Of the
+			 500 top ranked board games, only 80 received 4 star reviews, and of those 80 games, 73% were strategy games. Additionally, high ratings do 
+			 not necessarily correlate with high purchase volume.</p>
+
+			<h2>Narrative Structure</h2>
+			<p>My narrative visualization is structured as an interactive slideshow. Each of the scenes in the slideshow can be viewed by clicking on a 
+			button (i.e. Reviews by Category, Reviews by Star Ratings, etc.) which directs the user to the next scene. In any one of the scenes, users 
+			can hover over data points to learn more about a game (name, rank, category, description, etc.).</p>
+
+			<h2>Visual Structure</h2>
+			<p>The first section uses a bubble chart to depict each of the top rated games as a single color coded bubble. The color coding by 
+			category is kept consistent throughout the visualization so users can easily track the movement of bubbles across the scene. There 
+			are four buttons which are used to help a user navigate through the slideshow, as each button is clicked, the bubbles move into various 
+			areas on the screen. By moving the same set of 500 bubbles across the scene a user can easily track bubbles and notice patterns in the data.</p>
+
+			<h2>Scenes</h2>
+			<p>The first scene is the “All Reviews” scene which gives a high level overview of all of the data in the game dataset. The area of each game’s 
+			circle is determined by its number of reviews. The next scene is the “Reviews by Category” scene which splits the bubbles into five categories, 
+			Family, Strategy, Thematic, Party, and Uncategorized. I placed this scene second so that users understand how large the Strategy set is, and so 
+			they understand the color coding of the data set. The third scene breaks down the data into quartiles, so users can see the highest ranked games 
+			(Q1) and compare to other quartiles. Users should notice that most of Q1 is Strategy. The last scene is “Reviews by Star ratings” which further 
+			illustrates how the highest rated games are strategy games and that people seldom give even the highest rated games high reviews. The graph below 
+			allows a user to examine games by purchase data and category so that users can again see how category seems to correlate with popularity and 
+			purchases. Users can manipulate the graph to examine short games and long games (games longer than 2 hours).</p>
+
+			<h2>Annotations</h2>
+			<p>The annotations are bright green so that they are easily visible and stand out to the viewer. Each annotation has a title and a detailed 
+			comment below which provides more information. The annotations do not change within a single scene. Each of the annotations comments on the 
+			popularity of strategy games in the data set since that is the main message of this set.</p>
+		</div>
+	</div>
+	<div class="section" id="dataset">
+		<div id="content_div">
+			<h1>Essay part 2</h1>
+			<h2>Parameters and Triggers</h2>
+			<p>Each of the parameters are defined by the scene the user is viewing. For the overview scene of the bubble chart visualization, 
+			parameters for the x,y coordinates of each bubble are set to an initial central position for the All Reviews Visualization. As a user 
+			clicks one of the buttons to view another scene, it triggers the change of the bubble’s x,y coordinates. For example, each of the categories 
+			in Reviews by Category has a different central x,y position for its group of bubbles. In the bar chart presentation, the data set is split 
+			into short (less than 2 hr) and long (more than 2 hr) games. Users may select from a dropdown to focus only on short or long term games, These parameters are 
+			triggered to be updated as mouseover tooltips as well as the dropdown selection for short and long games. Also, clicking on the sort button triggers 
+			the movement of the bars in order from greatest to smallest.</p>
+		</div>
+	</div>
+	<div class="section" id="background_bw">
+		<div id="bubble_title"><h1>High-Level Overview for All Board Games in Dataset</h1></div>
+		<div id="bubble_content">
+			<div id="bubble_container">
+				<div id="toolbar">
+					<a href="#" id="all" class="button active">All Reviews</a>
+					<a href="#" id="state" class="button">Reviews by Category</a>
+					<a href="#" id="quartile" class="button">Reviews by Quartile</a>
+					<a href="#" id="stars" class="button">Reviews By Star Ratings</a>
+				</div>
+				<div id="vis"></div>
+			</div>
+		</div>
+	</div>
+	<div class="section" id="line_chart">
+		<div id="linechart_title"><h1>Total Game Purchases per Category - with Review Breakdown (toggle for short or long game)</h1></div>
+		<div id="linechart_content">
+			<svg id="chart" width="650" height="400" ></svg>
+			<div id="linechart_toggle" >
+				Select Type of App:
+				<select id="year"></select>
+				<input type="checkbox" id="sort"> Toggle sort </input>
+		</div>
+		</div>
+		
+	</div>
+	<div class="section" id="analytics">
+		<div id="content_div">
+			<h2>Overview</h2>
+			<p>BoardGameGeek.com is a great website for users interested in finding new board games. It has a library of over 18,000 board games and user 
+			generated reviews and ratings for each game. Approximately 15 million user reviews were aggregated to put this data set together. For ease of 
+			use and to reduce load time, I decided to focus only on the top 500 ranked board games. My data is sourced from 
+			<a href='https://www.kaggle.com/jvanelteren/boardgamegeek-reviews' target='_blank'>Kaggle</a>. </p>
+
+			<h2>Messaging</h2>
+			<p>The message I am trying to communicate with my narrative visualization is on the relationship between the category of the board game 
+			(i.e. strategy, party, family, etc.) and its number of reviews, average rating, quartile ranking, star rating, and actual purchase volumes. 
+			I want users to understand that the highest rated board games are mostly strategy games, and that people tend to rate games harshly. Of the
+			 500 top ranked board games, only 80 received 4 star reviews, and of those 80 games, 73% were strategy games. Additionally, high ratings do 
+			 not necessarily correlate with high purchase volume.</p>
+		</div>
+	</div>	
+	<div class="section" id="acks">
+		<div id="acks_div">
+			<h1>References and Resources</h1>
+			<h2>Github Repository</h1>
+			<ul>
+				<li><a href="https://github.com/maryatha/bgg" target="_blank">CS416 Final Project</a></li>
+			</ul>
+			<h2>Dataset</h2>
+			<ul>
+				<li><a href='https://www.kaggle.com/jvanelteren/boardgamegeek-reviews' target='_blank'>BoardGameGeek Data Source</a></li>
+			</ul>			
+			<h2>References</h2>
+			<ul>
+				<li><a href='http://vallandingham.me/bubble_chart_v4/' target='_blank'>
+					Bubble Chart d3 v4 Github</a></li>
+				<li><a href='https://gist.github.com/meli-lewis/cded559f101ebd5e1c3af5f5e38403cf' target='_blank'>
+					Barchart Example</a></li>
+				<li><a href='https://github.com/stanleykylee/cs498-ddv-final' target='_blank'>CS498 Final Project</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="js/tooltip.js"></script>
+<script type="text/javascript" src="js/bubble_chart.js"></script>
+<script type="text/javascript" src="js/linechart.js"></script>
+<script type="text/javascript" src="js/annotations.js"></script>
+
+</body>
+</html>
